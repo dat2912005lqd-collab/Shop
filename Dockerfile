@@ -19,7 +19,7 @@ USER spring:spring
 # Copy jar from build stage
 COPY --from=build /app/target/*.jar app.jar
 
-# Expose port (Render will set PORT env variable)
+# Expose port
 EXPOSE 8080
 
 # Run the application
