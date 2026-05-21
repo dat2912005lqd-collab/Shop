@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: shop
+    env: docker
+    region: oregon
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: DB_URL
+        value: jdbc:postgresql://localhost:5432/shopdb
+      - key: DB_USERNAME
+        value: postgres
+      - key: DB_PASSWORD
+        value: 123456
+      - key: DB_DIALECT
+        value: org.hibernate.dialect.PostgreSQLDialect
+      - key: PORT
+        value: 10000
