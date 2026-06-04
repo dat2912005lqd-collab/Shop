@@ -17,23 +17,28 @@ public class DataSourceConfig {
         String url = firstNonNull(
                 env.getProperty("JDBC_DATABASE_URL"),
                 env.getProperty("SPRING_DATASOURCE_URL"),
-                env.getProperty("DATABASE_URL")
+                env.getProperty("DATABASE_URL"),
+                env.getProperty("spring.datasource.url")
         );
         String username = firstNonNull(
                 env.getProperty("DB_USERNAME"),
                 env.getProperty("SPRING_DATASOURCE_USERNAME"),
                 env.getProperty("DATABASE_USERNAME"),
-                "postgres"
+                env.getProperty("spring.datasource.username"),
+                "sa"
         );
         String password = firstNonNull(
                 env.getProperty("DB_PASSWORD"),
                 env.getProperty("SPRING_DATASOURCE_PASSWORD"),
                 env.getProperty("DATABASE_PASSWORD"),
-                "123456"
+                env.getProperty("spring.datasource.password"),
+                ""
         );
 
         if (url == null || url.isBlank()) {
-            url = "jdbc:postgresql://localhost:5432/shopdb";
+            throw new IllegalStateException(
+                    "No database URL configured. Set JDBC_DATABASE_URL, SPRING_DATASOURCE_URL, DATABASE_URL or spring.datasource.url"
+            );
         }
 
         if (!url.startsWith("jdbc:")) {
@@ -48,7 +53,6 @@ public class DataSourceConfig {
         dataSource.setJdbcUrl(url);
         dataSource.setUsername(username);
         dataSource.setPassword(password);
-        dataSource.setDriverClassName("org.postgresql.Driver");
         return dataSource;
     }
 
