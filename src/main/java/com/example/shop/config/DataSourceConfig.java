@@ -46,6 +46,14 @@ public class DataSourceConfig {
             password = jdbcConfig.password;
         }
 
+        String dialect = jdbcConfig.url.startsWith("jdbc:postgresql:")
+                ? "org.hibernate.dialect.PostgreSQLDialect"
+                : "org.hibernate.dialect.H2Dialect";
+        System.setProperty("spring.jpa.database-platform", dialect);
+        System.setProperty("spring.jpa.properties.hibernate.dialect", dialect);
+        System.setProperty("hibernate.dialect", dialect);
+        System.setProperty("jakarta.persistence.jdbc.url", jdbcConfig.url);
+
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setJdbcUrl(jdbcConfig.url);
         dataSource.setUsername(username == null ? "sa" : username);
