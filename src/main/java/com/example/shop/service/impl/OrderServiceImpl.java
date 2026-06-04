@@ -1,4 +1,4 @@
-package com.example.shop.service;
+package com.example.shop.service.impl;
 
 import com.example.shop.dto.CreateOrderItemRequestDTO;
 import com.example.shop.dto.CreateOrderRequestDTO;
@@ -17,6 +17,8 @@ import com.example.shop.repository.CustomerRepository;
 import com.example.shop.repository.OrderItemRepository;
 import com.example.shop.repository.OrderRepository;
 import com.example.shop.repository.ProductRepository;
+import com.example.shop.service.OrderService;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

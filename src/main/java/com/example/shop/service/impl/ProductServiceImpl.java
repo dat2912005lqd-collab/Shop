@@ -1,4 +1,4 @@
-package com.example.shop.service;
+package com.example.shop.service.impl;
 
 import com.example.shop.dto.CreateProductRequestDTO;
 import com.example.shop.dto.ProductResponse;
@@ -7,6 +7,8 @@ import com.example.shop.dto.UpdateProductStatusRequestDTO;
 import com.example.shop.entity.Products;
 import com.example.shop.exception.ProductNotFoundException;
 import com.example.shop.repository.ProductRepository;
+import com.example.shop.service.ProductService;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;

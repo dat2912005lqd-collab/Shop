@@ -6,13 +6,26 @@ services:
     plan: free
     healthCheckPath: /
     envVars:
-      - key: DB_URL
-        value: jdbc:postgresql://localhost:5432/shopdb
+      - key: JDBC_DATABASE_URL
+        fromService:
+          type: pserv
+          name: shop-postgres
+          property: connection_string
       - key: DB_USERNAME
-        value: postgres
+        fromService:
+          type: pserv
+          name: shop-postgres
+          property: username
       - key: DB_PASSWORD
-        value: 123456
-      - key: DB_DIALECT
-        value: org.hibernate.dialect.PostgreSQLDialect
+        fromService:
+          type: pserv
+          name: shop-postgres
+          property: password
       - key: PORT
-        value: 10000
+        value: "10000"
+
+  - type: pserv
+    name: shop-postgres
+    plan: free
+    region: oregon
+    ipAllowList: []
